@@ -1,0 +1,29 @@
+<form [formGroup]="login" (ngSubmit)="onSubmitLogin(login.value)" novalidate #form="ngForm">
+
+    <input type="hidden" formControlName="grant_type"/>
+    <div>
+      <label for="userName">User Name</label>
+      <input type="text" formControlName="userName" id="username" maxlength="60"/>
+    </div>
+    
+    <div>
+      <label for="password">Password</label>
+      <input type="password" formControlName="password" id="password" maxlength="60"/>
+    </div>
+    
+    <div>
+      <div class="error" *ngIf="login.errors">[{{login.errors.status}}]: {{login.errors.message}}</div>
+    </div>
+  
+    <div class="form-item">
+      <a (click)="form.ngSubmit.emit()"  href="javascript:void(0)">LOGIN</a>
+    </div>
+    <div class="form-item">
+      <a (click)="onReset()" href="javascript:void(0)">CLEAR ALL</a>
+    </div>
+
+    <div *ngIf="auth.isAuthenticated()">
+      <a (click)="logout()" href="javascript:void(0)">LOGOUT</a>
+    </div>
+    
+  </form>

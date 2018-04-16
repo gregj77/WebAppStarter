@@ -15,7 +15,7 @@ using Validation;
 
 namespace Api.Setup
 {
-    internal static class WebApiConfiguration
+    public static class WebApiConfiguration
     {
         public static HttpConfiguration ConfigureWebApi(this HttpConfiguration httpConfiguration, IContainer container)
         {

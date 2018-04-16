@@ -12,7 +12,7 @@ using Validation;
 
 namespace Api.Setup.DependencyInjection
 {
-    internal static class ContainerConfig
+    public static class ContainerConfig
     {
         private static volatile IContainer _container;
         private static readonly object Lock = new object();

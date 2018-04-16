@@ -45,7 +45,6 @@ namespace Api.Setup.Startup
                         c.SingleApiVersion("v1", ConfigurationManager.AppSettings.Get("ProductName"));
                         var xmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"bin\Documentation.XML");
                         c.IncludeXmlComments(xmlPath);
-                        c.OperationFilter<AddFileUploadParams>();
                         c.ResolveConflictingActions(x => x.First());
                     })
                     .EnableSwaggerUi(c =>
@@ -61,26 +60,6 @@ namespace Api.Setup.Startup
             });
 
             container.Resolve<ILogger>().Info("WebAPI Application started");
-        }
-
-        private class AddFileUploadParams : IOperationFilter
-        {
-            public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
-            {
-                if (apiDescription.ActionDescriptor.ActionName == "UploadViolations")
-                {
-                    operation.consumes.Add("multipart/form-data");
-                    operation.parameters.Add(
-                        new Parameter
-                        {
-                            name = "file",
-                            @in = "formData",
-                            required = true,
-                            type = "file"
-                        }
-                        );
-                }
-            }
         }
     }
 }

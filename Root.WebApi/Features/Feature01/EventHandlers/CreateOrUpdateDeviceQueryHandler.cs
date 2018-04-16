@@ -22,15 +22,6 @@ namespace Feature01.EventHandlers
             _logger = logger;
         }
 
-        public Task<ICollection<Device>> HffandleAsync(DeviceQuery query, CancellationToken cancellationToken)
-        {
-            return _deviceService
-                .FindDevices(query.Request)
-                .LogInfo(_logger, result => $"got {result.Count} devices")
-                .LogException(_logger)
-                .ToTask(cancellationToken);
-        }
-
         public Task<Device> HandleAsync(CreateOrUpdateDeviceQuery query, CancellationToken cancellationToken)
         {
             return _deviceService
